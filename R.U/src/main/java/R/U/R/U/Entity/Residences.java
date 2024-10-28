@@ -29,7 +29,7 @@ public class Residences {
     private String neighborhood;
     private String department;
     private String rooms;
-//    @Column(nullable = true)
+//  @Column(nullable = true)
     private int price;
     private String services;
     private String description;
