@@ -19,6 +19,11 @@ public class ResidencesServicesImpl implements ResidencesServices {
     }
 
     @Override
+    public Residences findResidencesById(Long id) {
+        return residencesRepository.findById(id).get();
+    }
+
+    @Override
     public Residences saveResidences(Residences residences) {
         return residencesRepository.save(residences);
     }

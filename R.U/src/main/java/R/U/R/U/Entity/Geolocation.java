@@ -18,7 +18,7 @@ public class Geolocation {
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private int idGeolocation;
+    private Long idGeolocation;
     private double latitude;
     private double longitude;
 

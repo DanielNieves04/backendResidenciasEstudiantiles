@@ -20,7 +20,7 @@ public class Residences {
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
-    private long idResidences;
+    private Long idResidences;
     private String name;
     //Manejarla con  AWS S3 y solo traer las url
     private String imageUrls;
@@ -29,12 +29,13 @@ public class Residences {
     private String neighborhood;
     private String department;
     private String rooms;
-//  @Column(nullable = true)
+//    @Column(nullable = true)
     private int price;
     private String services;
     private String description;
     private int ability;
     private String category;
+    private Boolean state;
 
     @OneToOne(
             cascade = CascadeType.ALL,
