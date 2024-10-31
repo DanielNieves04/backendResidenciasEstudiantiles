@@ -17,9 +17,8 @@ import java.util.List;
 public class Residences {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "resi_seq")
+    @SequenceGenerator(name = "resi_seq", sequenceName = "tbl_residences_seq", allocationSize = 1)
     private Long idResidences;
     private String name;
     //Manejarla con  AWS S3 y solo traer las url
@@ -28,7 +27,7 @@ public class Residences {
     private String city;
     private String neighborhood;
     private String department;
-    private String rooms;
+    private int rooms;
 //    @Column(nullable = true)
     private int price;
     private String services;

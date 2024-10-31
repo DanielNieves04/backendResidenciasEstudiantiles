@@ -15,9 +15,8 @@ import lombok.NoArgsConstructor;
 public class Geolocation {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "geo_seq")
+    @SequenceGenerator(name = "geo_seq", sequenceName = "tbl_geolocation_seq", allocationSize = 1)
     private Long idGeolocation;
     private double latitude;
     private double longitude;

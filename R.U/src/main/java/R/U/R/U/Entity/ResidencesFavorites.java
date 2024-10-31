@@ -15,9 +15,8 @@ import lombok.NoArgsConstructor;
 public class ResidencesFavorites {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fav_seq")
+    @SequenceGenerator(name = "fav_seq", sequenceName = "tbl_residencesFavorites_seq", allocationSize = 1)
     private Long idResidencesFavorites;
 
 

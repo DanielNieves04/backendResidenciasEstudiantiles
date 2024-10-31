@@ -27,3 +27,8 @@ SET
 FROM temp_data t
 WHERE r.id_residences = t.idResidence;
 
+SELECT setval('tbl_geolocation_seq', (SELECT MAX(id_geolocation) FROM tbl_geolocation) + 1, false);
+SELECT setval('tbl_residences_seq', (SELECT MAX(id_geolocation) FROM tbl_residences) + 1, false);
+
+
+
