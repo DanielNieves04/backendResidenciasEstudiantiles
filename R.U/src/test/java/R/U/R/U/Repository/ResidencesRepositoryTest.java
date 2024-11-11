@@ -28,7 +28,7 @@ class ResidencesRepositoryTest {
 
     @Test
     public void  findResidenceById(){
-        Long residenceId = 101L;
+        Long residenceId = 58L;
         Residences residencesById=residencesRepository.findById(residenceId).orElseThrow(() -> new RuntimeException("Product not found"));
         System.out.println("Residence =" + residencesById);
     }
@@ -42,7 +42,7 @@ class ResidencesRepositoryTest {
                 .build();
 
         Residences residencesSave = Residences.builder()
-                .name("Apartamento de estudiantes")
+                .name_residence("Apartamento de estudiantes")
                 .imageUrls("")
                 .address("Carrera 3 # 32-09")
                 .city("Pamplona")
@@ -65,13 +65,13 @@ class ResidencesRepositoryTest {
     public void updateResidences(){
         Long residenceId = 101L;
         Residences residencesUpdate=residencesRepository.findById(residenceId).orElseThrow(() -> new RuntimeException("Product not found"));
-        residencesUpdate.setName("Apartamento para estudiantes");
+        residencesUpdate.setName_residence("Apartamento para estudiantes");
         residencesRepository.save(residencesUpdate);
     }
 
     @Test
     public void deleteResidence(){
-        Long residenceId = 101L;
+        Long residenceId = 58L;
         residencesRepository.deleteById(residenceId);
     }
 

@@ -31,7 +31,7 @@ public class ResidencesServicesImpl implements ResidencesServices {
     @Override
     public Residences updateResidences(Long id, Residences residences) {
         Residences residencesdb = residencesRepository.findById(id).get();
-        residencesdb.setName(residences.getName());
+        residencesdb.setName_residence(residences.getName_residence());
         residencesdb.setAddress(residences.getAddress());
         residencesdb.setCity(residences.getCity());
         residencesdb.setCategory(residences.getCategory());

@@ -1,6 +1,8 @@
 package R.U.R.U.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -20,19 +22,23 @@ public class Residences {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "resi_seq")
     @SequenceGenerator(name = "resi_seq", sequenceName = "tbl_residences_seq", allocationSize = 1)
     private Long idResidences;
-    private String name;
+    @NotBlank(message = "Por favor agrega un nombre")
+    private String name_residence;
     //Manejarla con  AWS S3 y solo traer las url
     private String imageUrls;
     private String address;
     private String city;
+    @NotBlank(message = "Por favor indíca el barrio")
     private String neighborhood;
     private String department;
-    private int rooms;
+    @Min(1)
+    private Integer rooms;
 //    @Column(nullable = true)
-    private int price;
+    private Integer price;
     private String services;
     private String description;
-    private int ability;
+    @Min(1)
+    private Integer ability;
     private String category;
     private Boolean state;
 

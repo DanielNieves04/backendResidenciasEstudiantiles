@@ -20,17 +20,22 @@ public class ResidencesController {
         return residencesServices.findAllResidences();
     }
 
-    @PostMapping("/saveResidences")
+    @GetMapping("/findResidenceById/{id}")
+    public Residences findResidenceById(@PathVariable Long id){
+        return residencesServices.findResidencesById(id);
+    }
+
+    @PostMapping("/saveResidence")
     public Residences saveResidences(@RequestBody Residences residences) {
         return residencesServices.saveResidences(residences);
     }
 
-    @PutMapping("/updateResidences/{id}")
+    @PutMapping("/updateResidence/{id}")
     public Residences updateResidences(@PathVariable Long id, @RequestBody Residences residences) {
         return residencesServices.updateResidences(id, residences);
     }
 
-    @DeleteMapping("/deleteResidences/{id}")
+    @DeleteMapping("/deleteResidence/{id}")
     public String deleteResidences(@PathVariable Long id) {
         residencesServices.deleteResidences(id);
         return "Residences deleting successfully";
