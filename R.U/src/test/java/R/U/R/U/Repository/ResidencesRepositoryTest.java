@@ -28,7 +28,7 @@ class ResidencesRepositoryTest {
 
     @Test
     public void  findResidenceById(){
-        Long residenceId = 58L;
+        Long residenceId = 3L;
         Residences residencesById=residencesRepository.findById(residenceId).orElseThrow(() -> new RuntimeException("Product not found"));
         System.out.println("Residence =" + residencesById);
     }
@@ -71,7 +71,7 @@ class ResidencesRepositoryTest {
 
     @Test
     public void deleteResidence(){
-        Long residenceId = 58L;
+        Long residenceId = 3L;
         residencesRepository.deleteById(residenceId);
     }
 
