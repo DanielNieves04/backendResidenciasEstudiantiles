@@ -2,10 +2,12 @@ package R.U.R.U.Service;
 
 import R.U.R.U.Entity.Residences;
 import R.U.R.U.Repository.ResidencesRepository;
+import R.U.R.U.error.ResidencesNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResidencesServicesImpl implements ResidencesServices {
@@ -20,7 +22,11 @@ public class ResidencesServicesImpl implements ResidencesServices {
 
     @Override
     public Residences findResidencesById(Long id) {
-        return residencesRepository.findById(id).get();
+        Optional<Residences> residences = residencesRepository.findById(id);
+        if(!residences.isPresent()){
+            throw new ResidencesNotFoundException("Esta residencia no existe");
+        }
+        return residences.get();
     }
 
     @Override

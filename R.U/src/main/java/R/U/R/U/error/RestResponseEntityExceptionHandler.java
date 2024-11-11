@@ -1,5 +1,6 @@
 package R.U.R.U.error;
 
+import R.U.R.U.Entity.Residences;
 import R.U.R.U.error.dto.ErrorMessage;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,9 @@ import java.util.Map;
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ProductNotFoundException.class)
+    @ExceptionHandler(ResidencesNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<ErrorMessage> ResidencesNotFoundException(ProductNotFoundException exception){
+    public ResponseEntity<ErrorMessage> ResidencesNotFoundException(ResidencesNotFoundException exception){
         ErrorMessage message = new ErrorMessage(HttpStatus.NOT_FOUND , exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
     }

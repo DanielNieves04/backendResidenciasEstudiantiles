@@ -2,6 +2,8 @@ package R.U.R.U.Controller;
 
 import R.U.R.U.Entity.Residences;
 import R.U.R.U.Service.ResidencesServices;
+import R.U.R.U.error.ResidencesNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +23,12 @@ public class ResidencesController {
     }
 
     @GetMapping("/findResidenceById/{id}")
-    public Residences findResidenceById(@PathVariable Long id){
+    public Residences findResidenceById(@PathVariable Long id) throws ResidencesNotFoundException {
         return residencesServices.findResidencesById(id);
     }
 
     @PostMapping("/saveResidence")
-    public Residences saveResidences(@RequestBody Residences residences) {
+    public Residences saveResidences(@Valid @RequestBody Residences residences) {
         return residencesServices.saveResidences(residences);
     }
 

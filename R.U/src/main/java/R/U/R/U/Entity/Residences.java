@@ -26,6 +26,7 @@ public class Residences {
     private String name_residence;
     //Manejarla con  AWS S3 y solo traer las url
     private String imageUrls;
+    @NotBlank(message = "Por favor selecciona la ubicación")
     private String address;
     private String city;
     @NotBlank(message = "Por favor indíca el barrio")
@@ -41,15 +42,7 @@ public class Residences {
     private Integer ability;
     private String category;
     private Boolean state;
-
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(
-            name = "id_Geolocation",
-            referencedColumnName = "idGeolocation"
-    )
+    @Embedded
     private Geolocation geolocation;
 
     @ManyToOne(

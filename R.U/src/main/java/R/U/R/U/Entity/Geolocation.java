@@ -6,18 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+//Tabla Incrustable
 @Table(name="tbl_geolocation")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
+@Embeddable
 public class Geolocation {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "geo_seq")
-    @SequenceGenerator(name = "geo_seq", sequenceName = "tbl_geolocation_seq", allocationSize = 1)
-    private Long idGeolocation;
     private double latitude;
     private double longitude;
 
