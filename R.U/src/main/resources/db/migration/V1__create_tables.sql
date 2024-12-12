@@ -57,3 +57,13 @@
 
 
 
+SELECT MAX(id_users) FROM tbl_users;
+ALTER SEQUENCE tbl_residences_seq RESTART WITH 58;
+
+SELECT last_value, is_called
+FROM tbl_users_seq;
+
+SELECT nextval('tbl_residences_seq');
+SELECT setval('tbl_residences_seq', 58, false);
+
+SELECT * FROM tbl_users WHERE mail = 'pipe@daniel.com';

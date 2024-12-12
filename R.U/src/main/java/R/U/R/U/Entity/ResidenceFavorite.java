@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class ResidencesFavorites {
+public class ResidenceFavorite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fav_seq")
@@ -27,7 +27,7 @@ public class ResidencesFavorites {
             name="id_Users",
             referencedColumnName = "idUsers"
     )
-    private Users users;
+    private User user;
 
     @ManyToOne(
             cascade = CascadeType.ALL
@@ -36,5 +36,5 @@ public class ResidencesFavorites {
             name = "id_Residences",
             referencedColumnName = "idResidences"
     )
-    private Residences residences;
+    private Residence residence;
 }

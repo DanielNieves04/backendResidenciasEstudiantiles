@@ -3,6 +3,7 @@ package R.U.R.U.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 @Data
 @Builder
 //@ToString(exclude = "geolocation")
-public class Residences {
+public class Residence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "resi_seq")
@@ -26,33 +27,39 @@ public class Residences {
     private String name_residence;
     //Manejarla con  AWS S3 y solo traer las url
     private String imageUrls;
-    @NotBlank(message = "Por favor selecciona la ubicación")
+    @NotBlank(message = "Por favor indíca la dirección")
     private String address;
     private String city;
     @NotBlank(message = "Por favor indíca el barrio")
     private String neighborhood;
     private String department;
+    @NotNull(message = "Es obligatorio indicar el número de habitaciones")
     @Min(1)
     private Integer rooms;
 //    @Column(nullable = true)
+    @NotNull(message = "Es obligatorio asignar un precio a la residencia")
     private Integer price;
+    @NotNull(message = "Es obligatorio indicar los servicios con los que cuenta la residencia")
     private String services;
     private String description;
+    @NotNull(message = "Es obligatorio indicar la capacidad de personas de la residencia")
     @Min(1)
     private Integer ability;
+    @NotNull(message = "Es obligatorio seleccionar una categoria de su residencia")
     private String category;
     private Boolean state;
+    @NotNull(message = "Es obligatorio asignar una geolocalización a la residencia")
     @Embedded
     private Geolocation geolocation;
 
-    @ManyToOne(
-            cascade = CascadeType.ALL//cualquier acción que se realice en la entidad principal se propagará automáticamente a la entidad asociada
-    )
+    @NotNull(message = "Es obligatorio asignar un usuario a esta residencia")
+    @ManyToOne
     @JoinColumn(
             name="id_Users",
-            referencedColumnName = "idUsers"
+            referencedColumnName = "idUsers",
+            nullable = false
     )
-    private Users users;
+    private User user;
 
 
     // Metodo para obtener las URLs como lista

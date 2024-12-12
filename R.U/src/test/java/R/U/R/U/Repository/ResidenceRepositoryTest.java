@@ -1,36 +1,33 @@
 package R.U.R.U.Repository;
 
 import R.U.R.U.Entity.Geolocation;
-import R.U.R.U.Entity.Residences;
+import R.U.R.U.Entity.Residence;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.awt.*;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-class ResidencesRepositoryTest {
+class ResidenceRepositoryTest {
 
     @Autowired
     private ResidencesRepository residencesRepository;
 
-    public ResidencesRepositoryTest(){
+    public ResidenceRepositoryTest(){
     }
 
     @Test
     public void findAllResidences(){
-        List<Residences> residencesList= residencesRepository.findAll();
-        System.out.println("ResidencesList = " + residencesList);
+        List<Residence> residenceList = residencesRepository.findAll();
+        System.out.println("ResidencesList = " + residenceList);
     }
 
     @Test
     public void  findResidenceById(){
         Long residenceId = 3L;
-        Residences residencesById=residencesRepository.findById(residenceId).orElseThrow(() -> new RuntimeException("Product not found"));
-        System.out.println("Residence =" + residencesById);
+        Residence residenceById =residencesRepository.findById(residenceId).orElseThrow(() -> new RuntimeException("Product not found"));
+        System.out.println("Residence =" + residenceById);
     }
 
     @Test
@@ -41,7 +38,7 @@ class ResidencesRepositoryTest {
                 .longitude(7.381675)
                 .build();
 
-        Residences residencesSave = Residences.builder()
+        Residence residenceSave = Residence.builder()
                 .name_residence("Apartamento de estudiantes")
                 .imageUrls("")
                 .address("Carrera 3 # 32-09")
@@ -57,16 +54,16 @@ class ResidencesRepositoryTest {
                 .state(false)
                 .geolocation(geolocation)
                 .build();
-        residencesRepository.save(residencesSave);
+        residencesRepository.save(residenceSave);
 
     }
 
     @Test
     public void updateResidences(){
         Long residenceId = 101L;
-        Residences residencesUpdate=residencesRepository.findById(residenceId).orElseThrow(() -> new RuntimeException("Product not found"));
-        residencesUpdate.setName_residence("Apartamento para estudiantes");
-        residencesRepository.save(residencesUpdate);
+        Residence residenceUpdate =residencesRepository.findById(residenceId).orElseThrow(() -> new RuntimeException("Product not found"));
+        residenceUpdate.setName_residence("Apartamento para estudiantes");
+        residencesRepository.save(residenceUpdate);
     }
 
     @Test
