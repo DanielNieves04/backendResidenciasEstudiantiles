@@ -25,8 +25,8 @@ class ResidenceRepositoryTest {
 
     @Test
     public void  findResidenceById(){
-        Long residenceId = 3L;
-        Residence residenceById =residencesRepository.findById(residenceId).orElseThrow(() -> new RuntimeException("Product not found"));
+        Long residenceId = 1L;
+        Residence residenceById =residencesRepository.findById(residenceId).orElseThrow(() -> new RuntimeException("Residencia no encontrada"));
         System.out.println("Residence =" + residenceById);
     }
 

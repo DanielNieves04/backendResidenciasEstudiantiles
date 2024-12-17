@@ -46,6 +46,12 @@ public class UserController {
         return ResponseEntity.ok(usersServices.authenticateUser(request));
     }
 
+    @PostMapping("/{idUsers}/AddFavoriteResidence/{idResidences}")
+    private ResponseEntity<String> addFavoriteResidence(@PathVariable Long idUsers,@PathVariable Long idResidences){
+        usersServices.addFavoriteResidence(idUsers,idResidences);
+        return ResponseEntity.ok("Residencia añadida a favoritos");
+    }
+
     @PutMapping("/updateUser/{id}")
     private User updateUser (@PathVariable Long id, @Valid @RequestBody User user){
         return usersServices.updateUser(id, user);
@@ -55,5 +61,11 @@ public class UserController {
     private String deleteUser (@PathVariable Long id){
         usersServices.deleteUser(id);
         return "User deleting successfully";
+    }
+
+    @DeleteMapping("/{idUsers}/DeleteFavoriteResidence/{idResidences}")
+    private ResponseEntity<String> deleteFavoriteResidence(@PathVariable Long idUsers,@PathVariable Long idResidences){
+        usersServices.deleteFavoriteResidence(idUsers,idResidences);
+        return ResponseEntity.ok("Residencia eliminada de favoritos");
     }
 }

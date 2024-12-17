@@ -1,5 +1,6 @@
 package R.U.R.U.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -47,20 +48,20 @@ public class User implements UserDetails {
     private Role role;
 
     @ManyToMany(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
     @JoinTable(
-        name= "user_has_residenceFavorite",
-        joinColumns = @JoinColumn(
-                name = "id_users",
-                referencedColumnName ="idUsers"
-        ),
-        inverseJoinColumns = @JoinColumn(
-                name = "id_residencesFavorites",
-                referencedColumnName = "idResidencesFavorites"
-        )
+            name = "user_has_residence",
+            joinColumns = @JoinColumn(name = "id_users", referencedColumnName = "idUsers"),
+            inverseJoinColumns = @JoinColumn(name = "id_residences", referencedColumnName = "idResidences")
     )
-    private List<ResidenceFavorite> residenceFavoriteList;
+    private List<Residence> favoriteResidences;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Residence> residences = new ArrayList<>();
 
     //Vamos a controlar los roles
     @Override

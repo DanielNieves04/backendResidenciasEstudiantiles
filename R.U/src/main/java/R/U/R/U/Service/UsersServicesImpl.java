@@ -3,7 +3,9 @@ package R.U.R.U.Service;
 import R.U.R.U.Controller.models.AuthResponse;
 import R.U.R.U.Controller.models.AuthenticateRequest;
 import R.U.R.U.Controller.models.RegisterRequest;
+import R.U.R.U.Entity.Residence;
 import R.U.R.U.Entity.User;
+import R.U.R.U.Repository.ResidencesRepository;
 import R.U.R.U.Repository.UserRepository;
 import R.U.R.U.config.JwtService;
 import R.U.R.U.error.UsersNotFoundException;
@@ -21,6 +23,8 @@ import java.util.Optional;
 public class UsersServicesImpl implements UsersServices{
 
     private final UserRepository userRepository;
+
+    private final ResidencesRepository residencesRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -100,5 +104,35 @@ public class UsersServicesImpl implements UsersServices{
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void addFavoriteResidence(Long idUsers, Long idResidences) {
+        User user = userRepository.findById(idUsers)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Residence residence = residencesRepository.findById(idResidences)
+                .orElseThrow(() -> new RuntimeException("Residencia no encontrada"));
+
+        // Verificar que la residencia no esté ya en la lista
+        if (!user.getFavoriteResidences().contains(residence)) {
+            user.getFavoriteResidences().add(residence);
+            userRepository.save(user); // Actualiza el usuario en la base de datos
+        }
+    }
+
+    @Override
+    public void deleteFavoriteResidence(Long idUsers, Long idResidences) {
+        User user = userRepository.findById(idUsers)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Residence residence = residencesRepository.findById(idResidences)
+                .orElseThrow(() -> new RuntimeException("Residencia no encontrada"));
+
+        // Verificar que la residencia esté ya en la lista
+        if (user.getFavoriteResidences().contains(residence)) {
+            user.getFavoriteResidences().remove(residence);
+            userRepository.save(user); // Actualiza el usuario en la base de datos
+        }else {
+            throw new RuntimeException("La residencia no está en la lista de favoritos del usuario");
+        }
     }
 }

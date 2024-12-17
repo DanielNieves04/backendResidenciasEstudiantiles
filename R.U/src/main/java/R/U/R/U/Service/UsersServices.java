@@ -19,4 +19,6 @@ public interface UsersServices {
     AuthResponse authenticateUser (AuthenticateRequest request);
     User updateUser (Long id, User user);
     void deleteUser (Long id);
+    void addFavoriteResidence(Long idUsers, Long idResidences);
+    void deleteFavoriteResidence(Long idUsers, Long idResidences);
 }

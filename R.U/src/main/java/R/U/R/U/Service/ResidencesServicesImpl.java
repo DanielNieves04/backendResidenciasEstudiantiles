@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ResidencesServicesImpl implements ResidencesServices {
@@ -28,11 +27,8 @@ public class ResidencesServicesImpl implements ResidencesServices {
 
     @Override
     public Residence findResidencesById(Long id) {
-        Optional<Residence> residences = residencesRepository.findById(id);
-        if(!residences.isPresent()){
-            throw new ResidencesNotFoundException("Esta residencia no existe");
-        }
-        return residences.get();
+        return residencesRepository.findById(id)
+                .orElseThrow(() -> new ResidencesNotFoundException("Esta residencia no existe"));
     }
 
     @Override
