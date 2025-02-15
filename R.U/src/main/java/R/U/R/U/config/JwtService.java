@@ -19,7 +19,7 @@ import java.util.function.Function;
 //4 Impotar dependencias jjwt-api , jjwt-impl , jjwt-jackson
 @Service
 public class JwtService {
-    
+
     //Ocultamos la secret key
     @Value("$[API_SECRET_KEY]")
     private static String SECRET_KEY;

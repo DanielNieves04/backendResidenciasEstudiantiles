@@ -1,6 +1,9 @@
 package R.U.R.U.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -18,6 +21,11 @@ import java.util.List;
 @Data
 @Builder
 //@ToString(exclude = "geolocation")
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "idResidences"
+)
 public class Residence {
 
     @Id
@@ -53,14 +61,13 @@ public class Residence {
     @Embedded
     private Geolocation geolocation;
 
-    @NotNull(message = "Es obligatorio asignar un usuario a esta residencia")
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(
             name="id_Users",
             referencedColumnName = "idUsers",
             nullable = false
     )
-    @JsonBackReference
     private User user;
 
 

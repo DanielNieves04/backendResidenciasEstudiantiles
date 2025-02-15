@@ -1,6 +1,8 @@
 package R.U.R.U.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,6 +25,11 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "idUsers"
+)
 public class User implements UserDetails {
 
     @Id
@@ -60,8 +67,8 @@ public class User implements UserDetails {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Residence> residences = new ArrayList<>();
+
 
     //Vamos a controlar los roles
     @Override

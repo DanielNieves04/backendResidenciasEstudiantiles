@@ -41,6 +41,5 @@ public class ResidenceController {
         residencesServices.deleteResidences(id);
         return "Residences deleting successfully";
     }
-
     
 }
