@@ -37,9 +37,13 @@ public class SecurityConfig {
     //Lista Blanca(Metodos publicos)
     private RequestMatcher publicEndpoints(){
         return new OrRequestMatcher(
-          new AntPathRequestMatcher("/User/**"),
-          new AntPathRequestMatcher("/Residence/findAllResidences"),
-          new AntPathRequestMatcher("/Residence/findResidenceById/{id}")
+                new AntPathRequestMatcher("/User/findAllUsers"),
+                new AntPathRequestMatcher("/User/findUserById/**"),
+                new AntPathRequestMatcher("/User/findUserByMail"),
+                new AntPathRequestMatcher("/User/saveUser"),
+                new AntPathRequestMatcher("/User/authenticateUser"),
+                new AntPathRequestMatcher("/Residence/findAllResidences"),
+                new AntPathRequestMatcher("/Residence/findResidenceById/**")
         );
     }
 

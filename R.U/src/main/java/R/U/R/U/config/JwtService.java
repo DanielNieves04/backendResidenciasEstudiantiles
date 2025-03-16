@@ -21,9 +21,14 @@ import java.util.function.Function;
 public class JwtService {
 
     //Ocultamos la secret key
-    @Value("$[API_SECRET_KEY]")
     private static String SECRET_KEY;
 
+    public JwtService() {
+        SECRET_KEY = System.getenv("API_SECRET_KEY");
+        if (SECRET_KEY == null || SECRET_KEY.isEmpty()) {
+            throw new IllegalStateException("API_SECRET_KEY no está definida en las variables de entorno.");
+        }
+    }
 
     //Generamos el token
     //5

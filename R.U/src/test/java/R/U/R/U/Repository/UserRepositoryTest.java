@@ -45,11 +45,11 @@ class UserRepositoryTest {
         Role role = Role.Arrendador;
 
         User userSave = User.builder()
-                .first_name("Tatiana")
-                .lastName("Nives")
-                .mail("tita@daniel.com")
+                .first_name("Felipe")
+                .lastName("Urbano")
+                .mail("anderson@daniel.com")
                 .phone("3227992136")
-                .password("tita2007")
+                .password("123")
                 .city("Paz de Ariporo")
                 .department("Casanare")
                 .role(role)
