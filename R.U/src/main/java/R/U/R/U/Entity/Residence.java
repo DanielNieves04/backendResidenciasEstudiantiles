@@ -1,6 +1,7 @@
 package R.U.R.U.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -60,12 +61,9 @@ public class Residence {
     private Geolocation geolocation;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(
-            name="id_Users",
-            referencedColumnName = "idUsers",
-            nullable = false
-    )
+    @JsonIgnoreProperties(value = {"first_name", "lastName", "mail", "password", "phone", "city", "department", "role", "favoriteResidences", "residences"})
+    @ManyToOne
+    @JoinColumn(name = "id_users", nullable = false)
     private User user;
 
 

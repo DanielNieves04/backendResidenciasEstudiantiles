@@ -55,6 +55,7 @@ public class ResidencesServicesImpl implements ResidencesServices {
                 .rooms(residence.getRooms())
                 .price(residence.getPrice())
                 .ability(residence.getAbility())
+                .state(residence.getState())
                 .services(String.join(",", residence.getServices()))
                 .geolocation(residence.getGeolocation())
                 .user(user)
