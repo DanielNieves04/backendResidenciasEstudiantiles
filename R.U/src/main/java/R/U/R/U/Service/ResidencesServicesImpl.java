@@ -61,7 +61,13 @@ public class ResidencesServicesImpl implements ResidencesServices {
                 .build();
 
         // Guardar la residencia
-        return residencesRepository.save(residence1);
+        user.getResidences().add(residence1);
+
+        // Guardar la residencia y actualizar el usuario
+        residence1 = residencesRepository.save(residence1);
+        userRepository.save(user); // Asegurar que el usuario se actualice con la nueva residencia
+
+        return residence1;
     }
 
 
