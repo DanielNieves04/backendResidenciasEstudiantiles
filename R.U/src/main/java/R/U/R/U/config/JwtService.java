@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import io.github.cdimascio.dotenv.Dotenv;
 
 //3
 //4 Impotar dependencias jjwt-api , jjwt-impl , jjwt-jackson
@@ -24,9 +25,10 @@ public class JwtService {
     private static String SECRET_KEY;
 
     public JwtService() {
-        SECRET_KEY = System.getenv("API_SECRET_KEY");
+        Dotenv dotenv = Dotenv.load();
+        SECRET_KEY = dotenv.get("API_SECRET_KEY");
         if (SECRET_KEY == null || SECRET_KEY.isEmpty()) {
-            throw new IllegalStateException("API_SECRET_KEY no está definida en las variables de entorno.");
+            throw new IllegalStateException("API_SECRET_KEY no está definida en el archivo .env");
         }
     }
 
