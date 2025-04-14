@@ -48,6 +48,7 @@ public class User implements UserDetails {
     private String phone;
     private String city;
     private String department;
+    private String imageUrl;
 
     @NotNull(message = "Por favor selecciona tu rol")
     @Enumerated(EnumType.ORDINAL)

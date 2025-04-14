@@ -6,6 +6,7 @@ import R.U.R.U.Controller.models.AuthResponse;
 import R.U.R.U.Controller.models.AuthenticateRequest;
 import R.U.R.U.Controller.models.RegisterRequest;
 import R.U.R.U.Entity.User;
+import R.U.R.U.Repository.UserBasicInfo;
 import R.U.R.U.error.UsersNotFoundException;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public interface UsersServices {
     List<User> findAllUsers();
     User findUserById(Long id) throws UsersNotFoundException;
     Optional<User> findUserByMail(String mail);
+    Optional<UserBasicInfo> findBasicInfoById(Long id);
     AuthResponse saveUser (RegisterRequest request);
     AuthResponse authenticateUser (AuthenticateRequest request);
     User updateUser (Long id, User user);

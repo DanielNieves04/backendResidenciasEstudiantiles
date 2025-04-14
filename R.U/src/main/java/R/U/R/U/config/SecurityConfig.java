@@ -39,7 +39,8 @@ public class SecurityConfig {
         return new OrRequestMatcher(
                 new AntPathRequestMatcher("/User/findAllUsers"),
                 new AntPathRequestMatcher("/User/findUserById/**"),
-                new AntPathRequestMatcher("/User/findUserByMail"),
+                new AntPathRequestMatcher("/User/findUserByMail/**"),
+                new AntPathRequestMatcher("/User/findInfoById/**"),
                 new AntPathRequestMatcher("/User/saveUser"),
                 new AntPathRequestMatcher("/User/authenticateUser"),
                 new AntPathRequestMatcher("/Residence/findAllResidences"),

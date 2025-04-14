@@ -66,7 +66,6 @@ public class Residence {
     @JoinColumn(name = "id_users", nullable = false)
     private User user;
 
-
     // Metodo para obtener las URLs como lista
     public List<String> getImageUrls() {
         return imageUrls != null ? Arrays.asList(imageUrls.split(",")) : new ArrayList<>();

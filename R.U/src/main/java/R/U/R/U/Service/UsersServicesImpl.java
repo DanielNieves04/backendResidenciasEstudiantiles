@@ -6,6 +6,7 @@ import R.U.R.U.Controller.models.RegisterRequest;
 import R.U.R.U.Entity.Residence;
 import R.U.R.U.Entity.User;
 import R.U.R.U.Repository.ResidencesRepository;
+import R.U.R.U.Repository.UserBasicInfo;
 import R.U.R.U.Repository.UserRepository;
 import R.U.R.U.config.JwtService;
 import R.U.R.U.error.UsersNotFoundException;
@@ -50,6 +51,11 @@ public class UsersServicesImpl implements UsersServices{
     @Override
     public Optional<User> findUserByMail(String mail) {
         return userRepository.findUserByMail(mail);
+    }
+
+    @Override
+    public Optional<UserBasicInfo> findBasicInfoById(Long id) {
+        return userRepository.findBasicInfoById(id);
     }
 
     @Override

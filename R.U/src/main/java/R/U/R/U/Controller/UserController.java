@@ -4,6 +4,7 @@ import R.U.R.U.Controller.models.AuthResponse;
 import R.U.R.U.Controller.models.AuthenticateRequest;
 import R.U.R.U.Controller.models.RegisterRequest;
 import R.U.R.U.Entity.User;
+import R.U.R.U.Repository.UserBasicInfo;
 import R.U.R.U.Service.UsersServices;
 import R.U.R.U.error.UsersNotFoundException;
 import jakarta.validation.Valid;
@@ -34,6 +35,11 @@ public class UserController {
     @GetMapping("/findUserByMail/{mail}")
     private Optional<User> findUserByMail(@PathVariable String mail){
         return usersServices.findUserByMail(mail);
+    }
+
+    @GetMapping("/findInfoById/{id}")
+    private Optional<UserBasicInfo> findInfoById(@PathVariable Long id){
+        return usersServices.findBasicInfoById(id);
     }
 
     @PostMapping("/saveUser")
