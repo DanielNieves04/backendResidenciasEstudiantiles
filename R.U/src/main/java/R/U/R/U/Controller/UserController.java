@@ -5,14 +5,20 @@ import R.U.R.U.Controller.models.AuthenticateRequest;
 import R.U.R.U.Controller.models.RegisterRequest;
 import R.U.R.U.Entity.User;
 import R.U.R.U.Repository.UserBasicInfo;
+import R.U.R.U.Service.EmailService;
+import R.U.R.U.Service.PasswordResetService;
 import R.U.R.U.Service.UsersServices;
 import R.U.R.U.error.UsersNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -21,6 +27,9 @@ public class UserController {
 
     @Autowired
     UsersServices usersServices;
+
+    @Autowired
+    PasswordResetService passwordResetService;
 
     @GetMapping("/findAllUsers")
     private List<User> findAllUsers(){
@@ -73,5 +82,37 @@ public class UserController {
     private ResponseEntity<String> deleteFavoriteResidence(@PathVariable Long idUsers,@PathVariable Long idResidences){
         usersServices.deleteFavoriteResidence(idUsers,idResidences);
         return ResponseEntity.ok("Residencia eliminada de favoritos");
+    }
+
+    // Endpoint: /User/requestReset/{email}
+    @GetMapping("/requestReset/{email}")
+    public ResponseEntity<?> requestPasswordReset(@PathVariable String email) {
+        boolean success = passwordResetService.sendPasswordResetCode(email);
+        return success ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    // Endpoint: /User/validateCode/{email}/{code}
+    @GetMapping("/validateCode/{email}/{code}")
+    public ResponseEntity<?> validateResetCode(
+            @PathVariable String email,
+            @PathVariable String code) {
+        boolean valid = passwordResetService.validateResetCode(email, code);
+        return ResponseEntity.ok().body(Collections.singletonMap("valid", valid));
+    }
+
+    // Endpoint: /User/resetPassword/{email}/{code}
+    //Body: "nuevaContraseña123"
+    @PostMapping("/resetPassword/{email}/{code}")
+    public ResponseEntity<?> resetPassword(
+            @PathVariable String email,
+            @PathVariable String code,
+            @RequestBody String newPassword) {
+
+        if (!passwordResetService.validateResetCode(email, code)) {
+            return ResponseEntity.badRequest().body("Código inválido o expirado");
+        }
+
+        passwordResetService.changePassword(email, newPassword);
+        return ResponseEntity.ok().build();
     }
 }

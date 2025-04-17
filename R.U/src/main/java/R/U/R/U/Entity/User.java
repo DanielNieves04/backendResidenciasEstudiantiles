@@ -65,10 +65,8 @@ public class User implements UserDetails {
     )
     private List<Residence> favoriteResidences;
 
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Residence> residences = new ArrayList<>();
-
 
     //Vamos a controlar los roles
     @Override
