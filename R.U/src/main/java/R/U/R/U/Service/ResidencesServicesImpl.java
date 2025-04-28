@@ -49,7 +49,7 @@ public class ResidencesServicesImpl implements ResidencesServices {
                 .city(residence.getCity())
                 .category(residence.getCategory())
                 .description(residence.getDescription())
-                .imageUrls(String.join(",", residence.getImageUrls()))
+                .imageUrls(residence.getImageUrls())
                 .neighborhood(residence.getNeighborhood())
                 .department(residence.getDepartment())
                 .rooms(residence.getRooms())

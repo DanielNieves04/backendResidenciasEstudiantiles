@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -33,8 +31,14 @@ public class Residence {
     private Long idResidences;
     @NotBlank(message = "Por favor agrega un nombre")
     private String name_residence;
+
     //Manejarla con  AWS S3 y solo traer las url
-    private String imageUrls;
+    @ElementCollection
+    @CollectionTable(name = "imagen_urls", joinColumns = @JoinColumn(name = "id_residences"))
+    @Column(name = "url")
+    @Size(min = 5, message = "Debe proporcionar al menos 5 URLs")
+    private List<String> imageUrls;
+
     @NotBlank(message = "Por favor indíca la dirección")
     private String address;
     private String city;
@@ -65,7 +69,7 @@ public class Residence {
     @ManyToOne
     @JoinColumn(name = "id_users", nullable = false)
     private User user;
-
+/*
     // Metodo para obtener las URLs como lista
     public List<String> getImageUrls() {
         return imageUrls != null ? Arrays.asList(imageUrls.split(",")) : new ArrayList<>();
@@ -75,7 +79,7 @@ public class Residence {
     public void setImageUrls(List<String> imageUrls) {
         this.imageUrls = String.join(",", imageUrls);
     }
-
+*/
     // Metodo para obtener los servicios como lista
     public List<String> getServices() {
         return services != null ? Arrays.asList(services.split(",")) : new ArrayList<>();
